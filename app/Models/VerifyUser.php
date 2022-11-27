@@ -9,7 +9,7 @@ class VerifyUser extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -21,7 +21,6 @@ class VerifyUser extends Model
 
     /**
      * Reverse one to one relationship to users
-     *  
      */
     public function user()
     {

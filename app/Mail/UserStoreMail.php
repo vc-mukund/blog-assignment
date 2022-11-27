@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VerifyUserMail extends Mailable
+class UserStoreMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -33,7 +33,7 @@ class VerifyUserMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Verify User Mail',
+            subject: 'User Create Mail',
         );
     }
 
@@ -45,7 +45,7 @@ class VerifyUserMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.verify-user',
+            view: 'email.user-store',
             with: [
                 'user' => $this->user,
             ]

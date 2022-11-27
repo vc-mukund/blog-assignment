@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\VerifyJob;
-use App\Jobs\VerifyUser as JobsVerifyUser;
-use App\Mail\VerifyUserMail;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\VerifyUser;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -75,7 +71,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
@@ -96,8 +91,8 @@ class RegisterController extends Controller
 
     /**
      * For verify user token
-     * 
-     * @param string $token
+     *
+     * @param  string  $token
      * @return mixed
      */
     public function verifyUser($token)
@@ -106,15 +101,15 @@ class RegisterController extends Controller
             $verifyUser = verifyUser::where('token', $token)->first();
             if (isset($verifyUser)) {
                 $user = $verifyUser->user;
-                if (!$user->verified) {
+                if (! $user->verified) {
                     $user->verified = 1;
                     $user->save();
-                    $status = "Your e-mail is verified. You can now login.";
+                    $status = 'Your e-mail is verified. You can now login.';
                 } else {
-                    $status = "Your e-mail is already verified. You can now login.";
+                    $status = 'Your e-mail is already verified. You can now login.';
                 }
             } else {
-                return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+                return redirect('/login')->with('warning', 'Sorry your email cannot be identified.');
             }
 
             return redirect('/login')->with('status', $status);
@@ -125,11 +120,11 @@ class RegisterController extends Controller
 
     /**
      * For redirect to login login for register email
-     * 
      */
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
+
         return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
     }
 }

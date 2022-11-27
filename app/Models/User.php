@@ -11,10 +11,13 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     public $timestamps = true;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +29,7 @@ class User extends Authenticatable
         'dob',
         'email',
         'password',
+        'verified',
     ];
 
     /**
@@ -47,9 +51,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-     /**
+    /**
      * One to one relationship to verify_user
-     *  
      */
     public function verifyUser()
     {
@@ -58,7 +61,6 @@ class User extends Authenticatable
 
     /**
      * For store first name with first capital letter
-     * 
      */
     public function setFnameAttribute($value)
     {
@@ -67,7 +69,6 @@ class User extends Authenticatable
 
     /**
      * For store last name with first capital letter
-     * 
      */
     public function setLnameAttribute($value)
     {
@@ -76,10 +77,21 @@ class User extends Authenticatable
 
     /**
      * For store email in lower case.
-     * 
      */
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
+    }
+
+    /**
+     * For search name and email.
+     *
+     * @param  srting  $search
+     */
+    public function scopeSearch($query, $search)
+    {
+        $query->where('fname', 'LIKE', '%'.$search.'%')
+            ->orwhere('lname', 'LIKE', '%'.$search.'%')
+            ->orwhere('email', 'LIKE', '%'.$search.'%');
     }
 }
