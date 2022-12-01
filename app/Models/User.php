@@ -84,14 +84,11 @@ class User extends Authenticatable
     }
 
     /**
-     * For search name and email.
+     * One to Many relationship with blog.
      *
-     * @param  srting  $search
      */
-    public function scopeSearch($query, $search)
+    public function blog()
     {
-        $query->where('fname', 'LIKE', '%'.$search.'%')
-            ->orwhere('lname', 'LIKE', '%'.$search.'%')
-            ->orwhere('email', 'LIKE', '%'.$search.'%');
+        return $this->hasMany(Blog::class);
     }
 }

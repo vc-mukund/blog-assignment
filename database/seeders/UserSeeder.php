@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'dob' => Carbon::create('1994', '10', '31'),
             'verified' => 1,
+            'created_at' => now(),
         ]);
 
         $user = User::find(1);

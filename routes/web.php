@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +20,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/verify/{token}', [RegisterController::class, 'VerifyUser'])->name('verify');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('isUser');
