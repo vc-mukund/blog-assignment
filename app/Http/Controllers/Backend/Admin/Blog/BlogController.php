@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend\Admin\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Blog\BlogCreateRequest;
 use App\Http\Requests\Backend\Blog\BlogUpdateRequest;
+use App\Models\Blog;
 use App\Services\Backend\Blog\BlogServices;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -143,4 +145,18 @@ class BlogController extends Controller
             Log::error($exception->getMessage());
         }
     }
+
+    /**
+     * Responds with a welcome message with instructions
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function changeStatus(Request $request)
+    // {
+    //     $user = Blog::find($request->user_id);
+    //     $user->status = $request->status;
+    //     $user->save();
+  
+    //     return response()->json(['success'=>'Status change successfully.']);
+    // }
 }

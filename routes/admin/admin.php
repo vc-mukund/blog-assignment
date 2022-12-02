@@ -69,6 +69,6 @@ Route::prefix('admin')->as('admin.')->middleware('auth', 'isAdmin')->group(funct
         //for admin
         Route::get('index/admin', [BlogController::class, 'indexAdmin'])
             ->name('index.admin')->middleware('role:admin');
-        Route::post('/changeStatus', [BlogController::class, 'changeStatus']);
+        // Route::get('/changeStatus', [BlogController::class, 'changeStatus']);
     });
 });

@@ -34,7 +34,7 @@
                             <tbody>
                                 @foreach ($blogs as $blog)
                                     <tr>
-                                        <td>{{ $loop->index+1 }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>
                                             <img src="{{ $blog->image }}" alt="" width="50px">
                                         </td>
@@ -61,11 +61,17 @@
                                                 <a href="{{ route('admin.blog.edit', $blog->id) }}"><i class="align-middle me-2"
                                                         data-feather="edit"></i></a>
 
-                                                <a href="{{ route('admin.blog.delete', $blog->id) }}" onclick="return confirm('Are you sure to delete')"><i
+                                                <a href="{{ route('admin.blog.delete', $blog->id) }}"
+                                                    onclick="return confirm('Are you sure to delete')"><i
                                                         class="align-middle me-2" data-feather="delete"></i></a>
                                             </td>
                                         @endrole
-
+                                        {{-- <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    data-id="{{ $blog->id }}" {{ $blog->status ? 'checked' : '' }}>
+                                            </div>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
