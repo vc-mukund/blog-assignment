@@ -107,7 +107,7 @@ class BLogServices
     public function adminBlogList(): object
     {
         try {
-            return Blog::all();
+            return Blog::orderBy('created_at', 'DESC')->get();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }

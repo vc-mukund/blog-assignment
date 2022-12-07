@@ -36,10 +36,10 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>
-                                            <img src="{{ $blog->image }}" alt="" width="50px">
+                                            {{-- <img src="{{ $blog->image }}" alt="" width="50px"> --}}
                                         </td>
-                                        <td>{{ $blog->title }}</td>
-                                        <td>{{ $blog->description }}</td>
+                                        <td>{{ Str::limit($blog->title, 20) }}</td>
+                                        <td>{{ Str::limit($blog->description, 20) }}</td>
                                         @role('admin')
                                             <td>{{ $blog->user->fname }}</td>
                                         @endrole

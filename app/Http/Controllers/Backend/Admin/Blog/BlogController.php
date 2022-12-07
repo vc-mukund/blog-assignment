@@ -145,18 +145,4 @@ class BlogController extends Controller
             Log::error($exception->getMessage());
         }
     }
-
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function changeStatus(Request $request)
-    // {
-    //     $user = Blog::find($request->user_id);
-    //     $user->status = $request->status;
-    //     $user->save();
-  
-    //     return response()->json(['success'=>'Status change successfully.']);
-    // }
 }
