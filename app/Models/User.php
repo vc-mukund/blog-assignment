@@ -15,7 +15,8 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
-
+    
+    public $incrementing = true;
     public $timestamps = true;
 
     /**
@@ -24,6 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'fname',
         'lname',
         'dob',

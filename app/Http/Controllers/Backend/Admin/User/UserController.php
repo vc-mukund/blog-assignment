@@ -7,7 +7,6 @@ use App\Http\Requests\Backend\User\UserStoreRequest;
 use App\Http\Requests\Backend\User\UserUpdadeRequest;
 use App\Services\Backend\User\UserServices;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -24,103 +23,79 @@ class UserController extends Controller
     }
 
     /**
-     * For listing of all users
+     * Display a listing of the users.
      *
-     * @return Illuminate/View/View
+     * @return View
      */
     public function index(): View
     {
-        try {
-            $users = $this->services->userList();
+        $users = $this->services->userList();
 
-            return view('backend.admin.user.index', compact('users'));
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return view('backend.admin.user.index', compact('users'));
     }
 
     /**
-     * For show add user page.
+     * Show the form for creating a new user.
      *
      * @return Illuminate View/View
      */
     public function create(): View
     {
-        try {
-            $roles = $this->roleList();
+        $roles = $this->services->roleList();
 
-            return view('backend.admin.user.add-user', compact('roles'));
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return view('backend.admin.user.add-user', compact('roles'));
     }
 
     /**
-     * For Store user in database.
+     * Store a newly created user in storage.
      *
      * @param  UserStoreRequest  $request
      * @return RedirectResponse
      */
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        try {
-            $this->services->userStore($request->only('id', 'fname', 'lname', 'email', 'password', 'dob', 'verified'));
+        $this->services->userStore($request);
 
-            return redirect()->route('admin.user.index');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return redirect()->route('admin.user.index');
     }
 
     /**
-     * For show form for update user
+     * Show the form for creating a new user.
      *
      * @param  int  $id
-     * @return Iluminate/View/View
+     * @return View
      */
     public function edit(int $id): View
     {
-        try {
-            $user = $this->services->findUser($id);
-            $roles = $this->roleList();
+        $user = $this->services->findUser($id);
+        $roles = $this->services->roleList();
 
-            return view('backend.admin.user.edit-user', compact('user', 'roles'));
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return view('backend.admin.user.edit-user', compact('user', 'roles'));
     }
 
     /**
-     * For update user.
+     * For update specific user.
      *
      * @param  UserUpdateRequest  $request
      * @return RedirectResponse
      */
     public function update(UserUpdadeRequest $request): RedirectResponse
     {
-        try {
-            $this->services->userStore($request->only('id', 'fname', 'lname', 'email', 'password', 'dob', 'verified'));
+        $this->services->userStore($request);
 
-            return redirect()->route('admin.user.index');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return redirect()->route('admin.user.index');
     }
 
     /**
-     * For delete user from database
+     * Update a existing user in storage.
      *
      * @param  int  $id
      * @return RedirectResponse
      */
     public function delete(int $id): RedirectResponse
     {
-        try {
-            $this->services->findUser($id)->delete();
+        $this->services->findUser($id)->delete();
 
-            return redirect()->route('admin.user.index');
-        } catch(\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return redirect()->route('admin.user.index');
     }
 }

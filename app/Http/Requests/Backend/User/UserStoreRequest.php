@@ -29,7 +29,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'dob' => ['required', 'date'],
             'password' => ['required', 'string', 'min:8'],
-            'verify' => 'required',
+            'verified' => 'required',
         ];
     }
 }

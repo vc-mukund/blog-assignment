@@ -24,11 +24,6 @@ class DashboardController extends Controller
      */
     public function dashboard(): View
     {
-        try {
-            return view('backend.admin.dashboard.dashboard');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-        }
+        return view('backend.admin.dashboard.dashboard');
     }
 }
-   

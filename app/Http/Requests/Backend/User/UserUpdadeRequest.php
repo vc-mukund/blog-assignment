@@ -28,7 +28,7 @@ class UserUpdadeRequest extends FormRequest
             'lname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'dob' => ['required', 'date'],
-            'verify' => 'required',
+            'verified' => 'required',
         ];
     }
 }

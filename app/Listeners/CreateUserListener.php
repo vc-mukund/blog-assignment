@@ -16,7 +16,7 @@ class CreateUserListener implements ShouldQueue
      */
     public function __construct()
     {
-        // Log::info();
+        Log::info('listener');
     }
 
     /**

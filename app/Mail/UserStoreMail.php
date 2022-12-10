@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UserStoreMail extends Mailable
 {
@@ -22,6 +23,7 @@ class UserStoreMail extends Mailable
      */
     public function __construct($user)
     {
+        Log::info($user);
         $this->user = $user;
     }
 

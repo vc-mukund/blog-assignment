@@ -2,80 +2,77 @@
 
 namespace App\Services\Backend\User;
 
-use App\Models\User;
+use App\Events\CreateUserEvent;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Spatie\Permission\Models\Role;
 
 class UserServices
 {
     /**
      * UserService Constructor
      *
-     * @param  User  $user
-     * @param  Role  $role
      * @return void
      */
-    public function __construct(
-        protected User $user,
-        protected Role $role,
-    ) {
+    public function __construct()
+    {
+        $this->modelUser = config('model-variable.models.user.class');
+        $this->modelRole = config('model-variable.models.blog.class');
     }
 
     /**
-     * For show all user data with search functionalty.
+     * Fetch a listing of the users.
      *
      * @return object
      */
     public function userList(): object
     {
         try {
-            return $this->user->get();
+            return $this->modelUser::all();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
     }
 
     /**
-     * For find specific user.
+     * For find existing user.
      *
      * @param  int  $id
-     * @return User $user
+     * @return Model
      */
-    public function findUser(int $id): User
+    public function findUser(int $id): Model
     {
         try {
-            $user = $this->user->findOrFail($id);
-
-            return $user;
+            return $this->modelUser::findOrFail($id);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
     }
 
     /**
-     * For fetch all roles of users
+     * Fetch listing of the roles.
      *
      * @return object
      */
     public function roleList(): object
     {
         try {
-            return $this->role->all();
-        } catch(\Exception $exception) {
+            return $this->modelRole::all();
+        } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
     }
 
     /**
-     * For create and update user.
+     * Create a newly user and update existing user in storage.
      *
      * @param  array  $data
-     * @return void
+     * @return bool
      */
-    public function userStore(array $data)
+    public function userStore($data)
     {
+        // $response = 
         DB::beginTransaction();
         try {
             $storeArr = [
@@ -83,22 +80,22 @@ class UserServices
                 'lname' => $data['lname'],
                 'email' => $data['email'],
                 'dob' => $data['dob'],
-                'verified' => $data['verify'],
+                'verified' => $data['verified'],
             ];
-            if (isset($data['password']) && !empty($data['password'])) {
+            if (!isset($data['id']) && empty($data['id'])) {
                 $storeArr['password'] = Hash::make($data['password']);
+                event(new CreateUserEvent($data->only('fname', 'lname', 'email', 'password')));
             }
-
-            $user = $this->user->updateOrCreate(
+            $user = $this->modelUser->updateOrCreate(
                 ['id' => $data['id']],
                 $storeArr
             );
-
             $user->syncRoles($data['role']);
+
+            DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage());
         }
-        DB::commit();
     }
 }

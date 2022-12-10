@@ -80,13 +80,13 @@
                             <label class="col-lg-2 col-form-label" for="val-skill">Verify <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-5">
-                                <select class="form-control" id="verify" name="verify">
+                                <select class="form-control" id="verified" name="verified">
                                     <option value="" disabled>Please select status</option>
                                     <option value="1" selected>Verified</option>
                                     <option value="0">Unverified</option>
                                 </select>
                                 <span class="text-danger">
-                                    @error('verify')
+                                    @error('verified')
                                     {{$message}}   
                                     @enderror
                                 </span>
