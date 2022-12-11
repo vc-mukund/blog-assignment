@@ -19,7 +19,7 @@
       <p><b>Password:</b> {{ $user['password'] }}</p>
       
       <p>
-        <b>Click here: </b><a href="http://127.0.0.1:8000/login">To Login in Laravel-Assignment</a>
+        <b>Click here: </b><a href="{{ route('login') }}">To Login in Laravel-Assignment</a>
       </p>
       
       <p>

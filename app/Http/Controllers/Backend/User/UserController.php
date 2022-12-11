@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Admin\User;
+namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\User\UserStoreRequest;
@@ -9,6 +9,13 @@ use App\Services\Backend\User\UserServices;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
+/**
+ * This controller provide different method such as 
+ * display specific exisitng resource, 
+ * lisiting all resource, 
+ * create newly and update existing resouce and  
+ * delete specifirc existing resource.
+ */
 class UserController extends Controller
 {
     /**
@@ -56,7 +63,7 @@ class UserController extends Controller
     {
         $this->services->userStore($request);
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.user.index')->with('success', 'User successfully registered!');
     }
 
     /**
@@ -83,7 +90,7 @@ class UserController extends Controller
     {
         $this->services->userStore($request);
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.user.index')->with('success', 'User successfully updated!');
     }
 
     /**
@@ -96,6 +103,6 @@ class UserController extends Controller
     {
         $this->services->findUser($id)->delete();
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.user.index')->with('success', 'User successfully deleted!');
     }
 }

@@ -2,13 +2,21 @@
 
 namespace App\Services\Backend\User;
 
+use App\Constant\Constant;
 use App\Events\CreateUserEvent;
+use App\Services\Core\Services;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-class UserServices
+/**
+ * This services provide different method such as 
+ * find specific existing resource, 
+ * fetch all resoure, 
+ * create newly and update existing resouce.  
+ */
+class UserServices extends Services
 {
     /**
      * UserService Constructor
@@ -18,7 +26,7 @@ class UserServices
     public function __construct()
     {
         $this->modelUser = config('model-variable.models.user.class');
-        $this->modelRole = config('model-variable.models.blog.class');
+        $this->modelRole = config('model-variable.models.role.class');
     }
 
     /**
@@ -70,9 +78,9 @@ class UserServices
      * @param  array  $data
      * @return bool
      */
-    public function userStore($data)
+    public function userStore($data): bool
     {
-        // $response = 
+        $response = Constant::STATUS_FALSE;
         DB::beginTransaction();
         try {
             $storeArr = [
@@ -86,16 +94,19 @@ class UserServices
                 $storeArr['password'] = Hash::make($data['password']);
                 event(new CreateUserEvent($data->only('fname', 'lname', 'email', 'password')));
             }
-            $user = $this->modelUser->updateOrCreate(
+            $user = $this->modelUser::updateOrCreate(
                 ['id' => $data['id']],
                 $storeArr
             );
             $user->syncRoles($data['role']);
 
             DB::commit();
+            $response = Constant::STATUS_TRUE;
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage());
         }
+
+        return $response;
     }
 }

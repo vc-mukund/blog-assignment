@@ -17,7 +17,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('telescope:prune')->daily();
-        $schedule->command('delete:blog')->daily();
+        $schedule->command('delete:blog')->daily('00:01');
+        $schedule->command('birthday:wish')->daily('00:01');
+        $schedule->command('queue:work --stop-when-empty')->everyMinute();
+        $schedule->command('queue:retry all')->everyMinute();
+
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Backend\Admin\Dashboard\DashboardController;
-use App\Http\Controllers\Backend\Admin\User\UserController;
+use App\Http\Controllers\Backend\Dashboard\DashboardController;
+use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Backend\Admin\Blog\BlogController;
+use App\Http\Controllers\Backend\Blog\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*

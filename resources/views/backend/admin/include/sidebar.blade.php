@@ -1,12 +1,12 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar mb-5">
-        <a class="sidebar-brand" href="index.html">
+        <a class="sidebar-brand" href="{{ route('admin.dashboard') }}">
             <span class="align-middle">Laravel-Assignment</span>
         </a>
 
         <ul class="sidebar-nav">
             <li class="sidebar-header">
-                Pages
+                Dashboard
             </li>
 
             <li class="sidebar-item">
@@ -15,26 +15,34 @@
                 </a>
             </li>
 
+            <li class="sidebar-header">
+                Users
+            </li>
+
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('admin.user.index') }}">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Users</span>
                 </a>
             </li>
-            
-            @role('editor')
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ route('admin.blog.index') }}">
-                    <i class="align-middle me-2" data-feather="book"></i> <span class="align-middle">Blogs</span>
-                </a>
+
+            <li class="sidebar-header">
+                Blogs
             </li>
+
+            @role('editor')
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.blog.index') }}">
+                        <i class="align-middle me-2" data-feather="book"></i> <span class="align-middle">Blogs</span>
+                    </a>
+                </li>
             @endrole
 
             @role('admin')
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ route('admin.blog.index.admin') }}">
-                    <i class="align-middle me-2" data-feather="book"></i> <span class="align-middle">Blogs</span>
-                </a>
-            </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('admin.blog.index.admin') }}">
+                        <i class="align-middle me-2" data-feather="book"></i> <span class="align-middle">Blogs</span>
+                    </a>
+                </li>
             @endrole
 
             {{-- <li class="sidebar-item">

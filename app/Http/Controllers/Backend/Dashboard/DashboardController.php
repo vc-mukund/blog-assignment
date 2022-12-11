@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Admin\Dashboard;
+namespace App\Http\Controllers\Backend\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
+/**
+ * This controller provide method such as 
+ * display admin dashboard
+ */
 class DashboardController extends Controller
 {
     /**

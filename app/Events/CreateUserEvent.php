@@ -24,7 +24,6 @@ class CreateUserEvent
      */
     public function __construct($data)
     {
-        Log::info($data);
         $this->data = $data;
     }
 

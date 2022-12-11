@@ -3,19 +3,17 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class UserStoreMail extends Mailable
+class BirthdayMail extends Mailable
 {
-    use Queueable;
-    use SerializesModels;
+    use Queueable, SerializesModels;
 
-    public $user;
-
+    protected $user;
     /**
      * Create a new message instance.
      *
@@ -34,7 +32,7 @@ class UserStoreMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'User Create Mail',
+            subject: 'Birthday Mail',
         );
     }
 
@@ -46,7 +44,7 @@ class UserStoreMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.user-store',
+            view: 'email.birthday',
             with: [
                 'user' => $this->user,
             ]

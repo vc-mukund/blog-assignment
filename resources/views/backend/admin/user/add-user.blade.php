@@ -14,7 +14,7 @@
                             <label class="col-lg-2 col-form-label" for="val-username">First Name <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter a name">
+                                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter a first name" value="{{ old('fname') }}">
                                 <span class="text-danger">
                                     @error('fname')
                                     {{$message}}   
@@ -27,7 +27,7 @@
                             <label class="col-lg-2 col-form-label" for="val-username">Last Name <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter a name">
+                                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter a last name" value="{{ old('lname') }}">
                                 <span class="text-danger">
                                     @error('lname')
                                     {{$message}}   
@@ -40,7 +40,7 @@
                             <label class="col-lg-2 col-form-label" for="val-email">Email <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-5">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter valid email..">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter valid email.." value="{{ old('email') }}">
                                 <span class="text-danger">
                                     @error('email')
                                     {{$message}}   
@@ -53,7 +53,7 @@
                             <label class="col-lg-2 col-form-label" for="val-username">Date Of Birth <span class="text-danger">*</span>
                             </label>
                             <div class="col-lg-5">
-                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter a name">
+                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter a name" value="{{ old('dob') }}">
                                 <span class="text-danger">
                                     @error('dob     ')
                                     {{$message}}   

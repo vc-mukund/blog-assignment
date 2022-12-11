@@ -2,24 +2,30 @@
 
 namespace App\Services\Backend\Blog;
 
-use App\Models\User;
-use App\Models\Blog;
+use App\Constant\Constant;
+use App\Services\Core\Services;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class BLogServices
+/**
+ * This services provide different method such as 
+ * find specific existing resource, 
+ * fetch all resoure, 
+ * create newly and update existing resouce.  
+ */
+class BlogServices extends Services
 {
     /**
      * BlogService Constructor
      *
-     * @param  User  $user
-     * @param  Blog  $blog
      * @return void
      */
-    public function __construct(
-        protected User $user,
-        protected Blog $blog,
-    ) {
+    public function __construct()
+    {
+        $this->modelUser = config('model-variable.models.user.class');
+        $this->modelBlog = config('model-variable.models.blog.class');
     }
 
     /**
@@ -30,7 +36,7 @@ class BLogServices
     public function editorBlogList(): object
     {
         try {
-            return $this->blog->with('user')->User()->orderBy('created_at', 'DESC')->get();
+            return $this->modelUser::with('user')->User()->orderBy('created_at', 'DESC')->get();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
@@ -40,12 +46,12 @@ class BLogServices
      * For find Specific blog
      *
      * @param int $id
-     * @return Blog
+     * @return Model
      */
-    public function findBlog(int $id): Blog
+    public function findBlog(int $id): Model
     {
         try {
-            return $this->blog->find($id);
+            return $this->modelBlog::findOrFail($id);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
@@ -57,8 +63,10 @@ class BLogServices
      * @param array $data
      * @return void
      */
-    public function blogStore(array $data)
+    public function blogStore($data): bool
     {
+        $response = Constant::STATUS_FALSE;
+        DB::beginTransaction();
         try {
             $storeArr = [
                 'title' => $data['title'],
@@ -70,13 +78,17 @@ class BLogServices
             if (isset($data['image']) && !empty($data['image'])) {
                 $storeArr['image'] = $this->storeImage($data);
             }
-            $this->blog->updateOrCreate(
+            $this->modelBlog::updateOrCreate(
                 ['id' => $data['id']],
                 $storeArr
             );
+            DB::commit();
+            $response = Constant::STATUS_TRUE;
         } catch (\Exception $exception) {
+            DB::rollBack();
             Log::error($exception->getMessage());
         }
+        return $response;
     }
 
     /**
@@ -85,7 +97,7 @@ class BLogServices
      * @param array $data
      * @return string
      */
-    public function storeImage(array $data): string
+    public function storeImage($data): string
     {
         try {
             $image = $data['image'];
@@ -107,7 +119,7 @@ class BLogServices
     public function adminBlogList(): object
     {
         try {
-            return Blog::orderBy('created_at', 'DESC')->get();
+            return $this->modelBlog::orderBy('created_at', 'DESC')->get();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }

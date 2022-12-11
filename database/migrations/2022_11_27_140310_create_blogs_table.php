@@ -17,9 +17,9 @@ return new class () extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('description');
-            $table->text('body');
-            $table->string('image');
-            $table->integer('status')->default(1);
+            $table->text('body')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('status')->comment('active:1, inactive:0')->default(1);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
