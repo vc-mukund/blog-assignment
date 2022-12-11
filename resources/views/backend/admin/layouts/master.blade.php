@@ -33,14 +33,15 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="/admin/js/blog.js"></script>
+    
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
     <script src="/admin/js/app.js"></script>
 
-    <script src="/admin/js/jquery.dataTables.min.js"></script>
-    <script src="/admin/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/admin/js/datatable-basic.min.js"></script>
+    <script src="{{ asset('/admin/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('/admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('/admin/js/datatable-basic.min.js') }}"></script>
 
+    @stack('script')
     
 </body>
 

@@ -98,3 +98,7 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+<script src="{{ asset('/admin/js/blog.js') }}"></script>   
+@endpush

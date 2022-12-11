@@ -24,7 +24,6 @@ class BlogServices extends Services
      */
     public function __construct()
     {
-        $this->modelUser = config('model-variable.models.user.class');
         $this->modelBlog = config('model-variable.models.blog.class');
     }
 
@@ -36,7 +35,7 @@ class BlogServices extends Services
     public function editorBlogList(): object
     {
         try {
-            return $this->modelUser::with('user')->User()->orderBy('created_at', 'DESC')->get();
+            return $this->modelBlog::with('user')->User()->orderBy('created_at', 'DESC')->get();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }

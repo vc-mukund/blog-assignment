@@ -29,7 +29,7 @@ Fetch the all code from remote branches to local branches
 
 	git fetch --all
 
-Assuming you've already installed composer on your machine: 2.0.11, [Composer](https://getcomposer.org)
+Assuming you've already installed composer on your machine: 2.4.4, [Composer](https://getcomposer.org)
 
     composer self-update or composer self-update --2
 

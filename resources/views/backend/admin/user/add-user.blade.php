@@ -127,3 +127,7 @@
 </div>
 </div>
 @endsection
+
+@push('script')
+ <script src="{{ asset('/admin/js/user.js') }}"></script>   
+@endpush
