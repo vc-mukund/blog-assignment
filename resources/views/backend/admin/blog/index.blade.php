@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Blog data</h2>
+                        <h2>Blogs</h2>
                         @role('editor')
                             <a href="{{ route('admin.blog.create') }}" style="float:right"><button
                                     class="btn btn-secondary btn">Add Blog</button></a>

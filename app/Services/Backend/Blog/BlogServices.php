@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * This services provide different method such as 
- * find specific existing resource, 
- * fetch all resoure, 
- * create newly and update existing resouce.  
+ * find specific existing blog data, 
+ * fetch all blogs, 
+ * create newly and update existing blog.  
  */
 class BlogServices extends Services
 {

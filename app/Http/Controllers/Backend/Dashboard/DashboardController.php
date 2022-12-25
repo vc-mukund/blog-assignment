@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
+use App\Services\Backend\Dashboard\DashboardServices;
 use Illuminate\View\View;
 
 /**
@@ -17,8 +17,9 @@ class DashboardController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        protected DashboardServices $services,
+    ) {
     }
 
     /**
@@ -28,6 +29,17 @@ class DashboardController extends Controller
      */
     public function dashboard(): View
     {
-        return view('backend.admin.dashboard.dashboard');
+        $users = $this->services->userList();
+        foreach ($users as $user) {
+            $fname[] = $user->fname;
+            $blog[] = $user->blog->count();
+        }
+
+        $blogs = $this->services->blogList();
+        foreach ($blogs as $item) {
+            $count[] = $item->count;
+        }
+
+        return view('backend.admin.dashboard.dashboard', compact('fname', 'blog', 'count'));
     }
 }

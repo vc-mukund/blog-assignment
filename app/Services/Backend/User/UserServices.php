@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * This services provide different method such as 
- * find specific existing resource, 
- * fetch all resoure, 
- * create newly and update existing resouce.  
+ * find specific existing user, 
+ * fetch all users, 
+ * create newly and update existing user.  
  */
 class UserServices extends Services
 {

@@ -44,4 +44,5 @@ class Blog extends Model
     {
         $query->where('user_id', Auth::user()->id);
     }
+
 }

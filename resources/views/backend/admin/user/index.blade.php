@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="card flex-fill">
                     <div class="card-header">
-                        <h2>User data</h2>
+                        <h2>Users</h2>
                         {{-- <div class="col-md-8"> --}}
                         @role('admin')
                             <a href="{{ route('admin.user.create') }}" style="float:right"><button

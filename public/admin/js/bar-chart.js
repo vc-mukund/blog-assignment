@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", function() {
     new Chart(document.getElementById("chartjs-dashboard-bar"), {
         type: "bar",
         data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels: users,
             datasets: [{
-                label: "This year",
+                label: "Total Blog",
                 backgroundColor: window.theme.primary,
                 borderColor: window.theme.primary,
-                hoverBackgroundColor: window.theme.primary,
-                hoverBorderColor: window.theme.primary,
-                data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+                hoverBackgroundColor: window.theme.danger,
+                hoverBorderColor: window.theme.danger,
+                data: blogs,
                 barPercentage: .75,
                 categoryPercentage: .5
             }]
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     stacked: false,
                     ticks: {
-                        stepSize: 20
+                        stepSize: 50
                     }
                 }],
                 xAxes: [{
